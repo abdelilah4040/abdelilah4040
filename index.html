@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Move Values Between Boxes</title>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+    .box {
+        border: 1px solid black;
+        padding: 10px;
+        width: 150px;
+        margin: 0 20px;
+        height: 200px;
+        overflow-y: auto;
+    }
+    .box-item {
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left box" id="leftBox">
+       
+        <div class="box-item" onclick="moveToRight(this)">Value 1</div>
+        <div class="box-item" onclick="moveToRight(this)">Value 2</div>
+        <div class="box-item" onclick="moveToRight(this)">Value 3</div>
+    </div>
+    <div class="right box" id="rightBox">
+       
+    </div>
+</div>
+
+<script>
+function moveToRight(element) {
+    var value = element.textContent;
+    element.parentNode.removeChild(element);
+    var rightBox = document.getElementById("rightBox");
+    var newItem = document.createElement("div");
+    newItem.textContent = value;
+    newItem.classList.add("box-item");
+    newItem.onclick = function() {
+        moveToLeft(this);
+    };
+    rightBox.appendChild(newItem);
+}
+
+function moveToLeft(element) {
+    var value = element.textContent;
+    element.parentNode.removeChild(element);
+    var leftBox = document.getElementById("leftBox");
+    var newItem = document.createElement("div");
+    newItem.textContent = value;
+    newItem.classList.add("box-item");
+    newItem.onclick = function() {
+        moveToRight(this);
+    };
+    leftBox.appendChild(newItem);
+}
+</script>
+
+</body>
+</html>
